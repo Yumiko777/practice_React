@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>React Practice</title>
+  </head>
+  <body>
+    <p>候補者1:田中
+    <div class="vote_button_container"></div>
+    </p>
+    <p>候補者2:鈴木
+    <div class="vote_button_container"></div>
+    </p>
+    <p>候補者3:佐藤
+    <div class="vote_button_container"></div>
+    </p>
+    <!-- React CDN読み込み -->
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <!-- Babel CDN読み込み -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      'use strict';
+      class VoteButton extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { voted: false };
+        }
+
+        render() {
+          if (this.state.voted) {
+            return (
+              <button onClick={() => this.setState({ voted: false })}>
+                voted
+              </button>
+            )
+          } else {
+            return (
+              <button onClick={() => this.setState({ voted: true })}>
+                vote
+              </button>
+            );
+          }
+        }
+      }
+
+      const e = React.createElement;
+      document.querySelectorAll('.vote_button_container').forEach(domContainer => {
+        ReactDOM.render(
+          React.createElement(VoteButton),
+          domContainer
+        );
+      });
+    </script>
+  </body>
+</html>
